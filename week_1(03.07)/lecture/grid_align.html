@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            display: grid;
+            grid-gap: 10px;
+            grid-auto-rows: 100px;
+            grid-template-columns: repeat(5, 100px);
+						background-color: beige;
+            /* 그리드 박스(container) 자체를 옮긴다 */
+            /* justify-content: center; */
+            
+            height: 100vh;
+            /* align-content: center; */
+            
+            /* align-content와 justify-content를 한번에 하는 코드 (수직-수평순, 1개만 정하면 둘 다에 적용) */
+            place-content: center center;
+            
+            /* container가 아닌 내부의 content,즉 item(글자, 그림 등 컨테이너 내부의 요소)를 정렬시킨다 */
+            /* content에 맞게 container의 외형도 바꾸어준다 */
+            /* justify-items: center; */
+            /* align-items: center; */
+            /* place-items: center; */
+        }
+
+        .box:nth-child(even) {
+            background-color: lightblue;
+        }
+
+        .box:nth-child(odd) {
+            background-color: lightcoral;
+        }
+
+        .box:first-child {
+            /* self로 셀을 특정하여 정렬을 적용할 수 있다 */
+            /* justify-self: center; */
+            /* align-self: center; */
+            /* place-self: center; */
+            /* flex를 이용하면 셀의 배경을 유지한채로 내부 요소만 정렬할 수 있다 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+</body>
+
+</html>

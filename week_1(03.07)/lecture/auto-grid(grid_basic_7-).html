@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            display: grid;
+            grid-gap: 10px;
+            grid-auto-rows: 100px;
+            /* auto-fit은 한 Row에 화면에 꽉차도록 지정된 아이템 갯수대로 column을 만들어준다 */
+            /* 즉, 조건에 맞추어 자동적으로 Column의 갯수를 지정해준다 */
+            /* 만약 minmax를 쓰지않고 100px로만 설정하면, 반응형으로 조정하는 순간에 해당 div자리를 알아서 채우지 않고 빈공간이 생긴다 */
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            /* auto-fill은 한 row에 column들을 최대한 많이 만들어내지만, 지정된 셀만 보여주고 이외에 남는 공간을 지정된 크기로 유지한다 */
+            /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
+
+        }
+
+        .box:nth-child(even) {
+            background-color: orange;
+        }
+
+        .box:nth-child(odd) {
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>

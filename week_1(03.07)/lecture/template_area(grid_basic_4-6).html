@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            display: grid;
+            grid-auto-rows: 200px;
+            grid-gap: 10px;
+            /* 1.사각형으로 2.모여있어야만 작동한다 */
+            /* grid-template-areas: "header header header"
+                           "content content sidebar"
+                           "content content sidebar"
+                           "footer footer footer"; */
+            /* column을 전체(100%) 비교해서 상대적크기(fraction)로 배열해 만들어라 */
+            /* repeat를 사용하면 행이 추가될 때 마다 특정 크기로 설정해준다 */
+            /* grid-template-columns: repeat(2, 1fr) repeat(2, 2fr); */
+            /* minmax를 설정하면 특정 컬럼의 fr에 대해서 최소최대크기를 지정할 수 있다 */
+            /* repeat안에 minmax를 넣으면 특정 컬럼에 대해서 반복적으로 최소최대크기를 지정할 수 있다 */
+            /* grid-template-columns: minmax(400px, 1fr) repeat(2, 1fr) minmax(400px, 1fr); */
+            grid-template-columns: repeat(3, minmax(400px, 1fr)) 1fr;
+            
+        }
+
+        .first {
+            /* grid-area: footer; */
+            background-color: orange;
+        }
+
+        .second {
+            /* grid-area: sidebar; */
+            background-color: yellowgreen;
+        }
+
+        .third {
+            /* grid-area: header; */
+            background-color: blueviolet;
+        }
+
+        .fourth {
+            /* grid-area: content; */
+            background-color: lightskyblue;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="first box">first</div>
+        <div class="second box">second</div>
+        <div class="third box">third</div>
+        <div class="fourth box">fourth</div>
+    </div>
+</body>
+
+</html>

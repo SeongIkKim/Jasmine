@@ -1,0 +1,58 @@
+/* @custom-selector :--heading h1, h2, h3, h4, h5, h6; */
+
+/* root는 html보다 위에 있는, 최상위 부분. */
+/* --변수명 을 이용하여 특정 css속성을 변수명으로 지정하여 사용할 수 있음 */
+/* 변수는 어디서 선언하느냐에 따라서 지역적으로/ 전역적으로 사용할 수 있음 */
+/* 
+:root {
+    --listSize: 25px;
+    --listBorder: 1px solid lightblue;
+  }
+  
+  ul {
+      --mainColor: #42b883;
+    list-style: none;
+  }
+  
+  li {
+    font-size: var(--listSize);
+    color: var(--mainColor);
+    border: var(--listBorder);
+    width: min-content;
+  } */
+
+
+
+
+
+  /* header라는 변수명 아래에 모든 h태그들을 묶어서 적용시킬 수 있도록 셀렉터를 설정하는 코드 */
+  @custom-selector :--headers h1, h2, h3, h4, h5, h6;
+
+  :--headers {
+    margin-block: 0;
+    color: #42b883;
+  }
+
+  /* 반응형을 편하게 사용하기 위한 미디어 쿼리 설정 */
+  /* 부트스트랩을 사용하는것은 커스텀하기 힘드므로 현업에서 권장되지 않는다 */
+  @custom-media --ipad-size (650px < width <= 850px );
+    
+    @media(--ipad-size) {
+      body {
+        background-color: beige;
+      }
+    }
+
+    ul {
+        list-style: none;
+        
+        & li {
+          border: var(--listBorder);
+          width: min-content;
+    
+            & a {
+                font-size: var(--listSize);
+              color: var(--mainColor);
+            }
+        }
+    }

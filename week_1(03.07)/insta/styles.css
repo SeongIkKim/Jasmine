@@ -1,0 +1,93 @@
+:root {
+    --navHeight: 60px;
+    --navColor: lightgreen;
+    --mainMargin: calc((100vw - 1000px)/2);
+    --profileColor: lightblue;
+    --storiesColor: lightsalmon;
+    --controlBarColor: yellow;
+    --feedContainerColor: gray;
+}
+
+@custom-media --lg-size (max-width: 1000px);
+@custom-media --md-size (max-width: 850px);
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    height: var(--navHeight);
+    background-color: var(--navColor);
+    position: fixed;
+    width: 100vw; 
+}
+
+main {
+    /* calc를 이용하면 단위가 달라도 계산식으로 크기를 조정할수있다 */
+    margin: 0 var(--mainMargin);
+}
+
+.profile {
+    padding-top: var(--navHeight);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 250px;
+    background-color: var(--profileColor);
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: rgba(255, 0 , 0 , 0.5);
+    margin: 10px;
+}
+
+
+.stories {
+    background-color: var(--storiesColor);
+    height: 150px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.control-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    background-color: var(--controlBarColor);
+    justify-content: center;
+}
+
+.feed-container {
+    background-color: var(--feedContainerColor);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.feed{
+    height:300px;
+}
+
+/* Css는 위에서부터 수행하다가 가장 아랫쪽의 것을 우선시하므로, 미디어쿼리를 제일 뒤로 둬야 미디어쿼리를 우선시하여 수행한다. */
+/* 따라서 미디어쿼리는 css 제일 아랫쪽에 몰아넣는것이 컨벤션. */
+@media(--lg-size){
+    main {
+        /* margin 0을 해주지않으면 lgsize보다 작아졌을경우 calcul에 의해서 main margin이 음수가 되어서 가로스크롤이 생긴다. */
+        margin:0;
+    }
+}
+
+@media(--md-size){
+    .profile {
+        /* 지정되어있던 것(repeat 3, 1fr)을 취소 */
+        grid-template-columns: unset;
+        grid-template-rows: 1fr 2fr;
+    }
+    .feed {
+        /* 피드가 찌그러지지않도록 일정 크기 이하의 창에서는 높이값을 유지하도록 만든다 */
+        height: 32vw;
+    }
+}

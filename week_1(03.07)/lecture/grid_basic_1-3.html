@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      display: grid;
+	  grid-template-rows: 300px 120px;
+      grid-template-columns: 300px 500px;
+      /* 그리드의 다음 행에서 셀을 추가하되 60px로 정해라 */
+      grid-auto-rows: 60px;
+      /* 그리드의 다음 열에서 셀을 추가하되 60px로 정해라 */
+      /* grid-auto-columns: 60px; */
+      grid-gap: 10px;
+    }
+
+    .box {
+      background-color: #42b883;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color:white;
+      font-size: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="father">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+    <div class="box">6</div>
+    <div class="box">7</div>
+    <div class="box">8</div>
+  </div>
+</body>
+</html>
