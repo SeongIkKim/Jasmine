@@ -5,8 +5,13 @@
     --sideBarWidth: 240px;
     --containerWidth: calc(100vw - 240px);
     --navColor: white;
-    --sideBarColor: lightgreen;
-    --containerColor: gainsboro;
+    --sideBarColor: white;
+    --containerColor: #F9F9F9;
+    --navIconColor: gray;
+    --sideBarIconColor : #212121;
+    --iconSize: 1.4rem;
+    --iconWidth: 24px;
+    --iconHeight: 24px;
 }
 
 body{
@@ -22,11 +27,26 @@ nav {
     position: fixed;
     display:grid;
     grid-template-columns: 1fr 3fr 16fr 4fr;
+    padding: 0 20px;
 }
 
 nav > div {
-    border: 1px solid;
     height: var(--navHeight);
+    display: flex;
+    justify-items: center;
+    align-items:center;
+}
+
+nav i  {
+    width: var(--iconWidth);
+    height: var(--iconHeight);
+    font-size: var(--iconSize);
+    color: var(--navIconColor);
+}
+
+.logo > img {
+    height: 24px;
+    width: 80px;
 }
 
 .searchBarSection {
@@ -38,8 +58,7 @@ nav > div {
 }
 
 .searchBar {
-    border: 1px solid;
-    width: 80%;
+    width: 60%;
     height: 30px;
     display: grid;
     grid-template-columns: 9fr 1fr;
@@ -56,11 +75,6 @@ nav > div {
     grid-template-columns: 1fr 1fr 1fr 2fr;
 }
 
-.buttons > .button {
-    border: 1px solid;
-}
-
-
 main {
     display: grid;
     grid-template-columns: 240px var(--containerWidth);
@@ -76,13 +90,25 @@ main {
 .sideBar {
     background-color: var(--sideBarColor);
     border-right: 1px solid;
-    /*sticky를 사용하면 화면 스크롤이 임계점에 다다르기 전까지 위치 고정 가능*/
     width: var(--sideBarWidth);
     overflow: scroll;
 }
 
 .sideBar a {
     text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+
+.sideBar i {
+    width: var(--iconWidth);
+    height: var(--iconHeight);
+    font-size: var(--iconSize);
+    color: var(--sideBarIconColor);
+}
+
+.sideBar i:hover {
+    color: red;
 }
 
 .menuItem {
@@ -119,13 +145,14 @@ main {
 }
 
 .container {
-    background-color: gainsboro;
+    background-color: var(--containerColor);
     overflow:scroll;
+    padding: 25px 15px;
 }
 
 .header {
     font-family: Arial, sans-serif;
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     line-height: 2.4rem;
 }
