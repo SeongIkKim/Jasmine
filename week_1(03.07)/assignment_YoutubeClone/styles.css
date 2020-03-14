@@ -12,6 +12,7 @@
 
     --sideBarItemHeight: 40px;
     --sideBarWidth: 240px;
+    --sideBarHeight: calc(100vh - var(--navHeight));
     --sideBarColor: white;
     --sideBarIconColor : #212121;
     --sideBarDownsizedWidth: 72px;
@@ -120,6 +121,7 @@ main {
 .sideBar {
     background-color: var(--sideBarColor);
     width: var(--sideBarWidth);
+    height: var(--sideBarHeight);
     overflow: scroll;
 }
 

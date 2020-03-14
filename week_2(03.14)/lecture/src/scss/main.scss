@@ -1,0 +1,163 @@
+@import 'config';
+// 변수명은 _config에 다 몰아넣기!
+
+// 선택자 바깥에 설정하면 모든 위치에서 사용할 수 있는 전역변수
+// $size1: 300px;
+
+// body {
+//     background-color: beige;
+
+//     // $size: 300px;
+//     // .box {
+//         // size변수를 쓰고 싶어서 여기로 가져왔는데 body .box 라는 body에 대한 depandency가 붙어버렸다
+//         // width: $size;
+//         // height: $size;
+//     // }
+
+//     // size변수를 쓰고 싶되 body에 대한 dependency가 안생기게 하려면 at-root를 사용한다
+//     // @at-root .box {
+//         // width: $size;
+//         // height: $size;
+//     // }
+
+//     // 만약 지역변수를 전역적으로 사용하고싶다면 !global 사용
+//     $size: 300px !global;
+// }
+
+
+// .box {
+//     // dependency 없이 모든 box에 대해서 적용된다
+//     // size라는 변수가 있으면 그 변수를 쓰겠고, 만약 없다면 200px로 size라는 변수를 사용하겠다.(!default)
+//     // 즉, 여기서는 body 태그에 전역변수 size가 이미 300px로 설정되어 있으므로 300px로 적용된다.
+//     $size: 200px !default;
+//     width: $size;
+//     height: $size;
+//     background-color: #42b883;
+//     display: grid;
+//     place-items: center;
+    
+//     //border에 대한 속성들로 하나씩 분리되어 적용됨 -- 즉, 같은 접두사를 사용하는 것들을 묶을 수 있다.
+//     border: {
+//         width: 1px;
+//         style: solid;
+//         color: black;
+//         radius: 5px;
+//     }
+
+//     //따라서 조금 더 직관적으로, 한눈에 margin에 관한 정보를 확인할 수 있다.
+//     margin: {
+//         top: 50px;
+//         left: 50px;
+//     }
+
+
+//     .link {
+//       color: white;
+//       font-size: 40px;
+//       //&선택자는 상위 선택자의 경로를 그대로 string으로 가져온다
+//       &:visited {
+//          color:black; 
+//       }
+//     }
+//   }
+
+//   //&선택자 응용 --> 그리드 크기 설정하기
+//   .col {
+//       &-sm {
+//         width: 300px;
+//       }
+//       &-md {
+//           width: 600px;
+//       }
+//   }
+
+  $screen-width: 100vw;
+//   바로 간단한 연산을 사용할 수 있는 function기능
+  @function columns($size: 1, $columns: 12){
+    @return $screen-width * ($size / $columns);
+  }
+
+  /*if문 예시*/
+  @function color-picker($color-name) {
+    @if($color-name == orange){
+        @return rgb(255,166,0);
+    }
+    @else if($color-name == banana){
+        @return rgb(255,255,53);
+    }
+    @else if($color-name == melon){
+        @return #b4fdbc
+    }
+    @else{
+        @return rgb(255,255,255);
+    }
+  }
+
+  /*for문 예시*/
+  
+  //증가값은 무조건 1씩 늘어남(설정 불가능)
+  //through는 start부터 end까지, to는 start부터 end-1까지
+  @for $i from 1 through 3 {
+      button:nth-child(#{$i}) {
+          width : 100px * $i;
+      }
+  }
+  @for $i from 4 to 6 {
+      button:nth-child(#{$i})   {
+          width : 100px * $i;
+      }
+  }
+
+// 부트스트랩 그리드 클론(커스텀)
+  .custom-container{
+      //columns-num을 바꿔주면 총몇개의 컬럼으로 셀을 나눌건지 정할수있다
+      $columns-num: 6;
+      width: $screen-width;
+      $height: 300px;
+      $color: orange;
+
+      .custom-col-$i {
+        width: columns(1, $columns-num);
+        height: $height;
+        // mixin은 include를 사용했지만, function은 그냥 바로 사용하면 된다.
+        background-color: color-picker(orange);
+        margin: 0;
+        display: inline-block;
+      }
+      .custom-col-2 {
+        width: columns(2, $columns-num);
+        height: $height;
+        background-color: $color;
+        margin: 0;
+        display: inline-block;
+      }
+      .custom-col-3 {
+        width: columns(3, $columns-num);
+        height: $height;
+        background-color: color-picker(banana);
+        margin: 0;
+        display: inline-block;
+      }
+      .custom-col-4 {
+        width: columns(4, $columns-num);
+        height: $height;
+        background-color: $color;
+        margin: 0;
+        display: inline-block;
+      }
+      .custom-col-5 {
+        width: columns(5, $columns-num);
+        height: $height;
+        background-color: $color;
+        margin: 0;
+        display: inline-block;
+      }
+      .custom-col-6 {
+        width: columns(6, $columns-num);
+        height: $height;
+        background-color: color-picker(melon);
+        margin: 0;
+        display: inline-block;
+      }
+  }
+
