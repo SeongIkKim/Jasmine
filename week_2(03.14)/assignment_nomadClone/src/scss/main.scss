@@ -17,12 +17,46 @@ nav {
     height: 100%;
     width: $containerFirstWidth;
     background-color: darkorchid;
+    margin: 0 auto;
+    padding: 0 15px;
+    
+    .navHeader {
+        height: $navHeight;
+        padding: 8px 0px;
+
+        
+        .navBrandHeader {
+            float:left;
+            display: flex;
+            align-items: center;
+
+            a {
+                text-decoration: none;
+                color: $titleColor;
+    
+                .navLogo {
+                    height: $logoHeight;
+                    width: $logoWidth;
+                    margin-right: 25px;
+                }
+            }
+
+        }
+        
+
+        .navButtons {
+            float: left;
+            
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
 }
 
-nav > .container > div {
-    height: $navHeight;
-    border: 1px solid red;
-}
 
 main {
     padding-top: $navHeight * 5;
