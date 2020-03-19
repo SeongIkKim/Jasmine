@@ -13,45 +13,100 @@ nav {
     display: flex;
 }
 
+@mixin default-box {
+    display: grid;
+    place-items: center;
+}
+
+@mixin default-a {
+    text-decoration: none;
+}
+
+@mixin default-font ($fontSize:18px, $fontWeight:400) {
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    color:white;
+}
+
 .container {
-    height: 100%;
     width: $containerFirstWidth;
-    background-color: darkorchid;
+    // background-color: darkorchid;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0px 15px;
     
     .navHeader {
-        height: $navHeight;
-        padding: 8px 0px;
-
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
         
         .navBrandHeader {
-            float:left;
             display: flex;
             align-items: center;
 
             a {
                 text-decoration: none;
                 color: $titleColor;
+                display: flex;
+                justify-content: center;
     
                 .navLogo {
                     height: $logoHeight;
                     width: $logoWidth;
                     margin-right: 25px;
                 }
+                .navTitle {
+                    border-left: 2px solid;
+                    padding-left: 21.5px;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 30px;
+                    display: flex;
+                    align-items: center;
+                }
             }
+            
 
         }
         
 
         .navButtons {
-            float: left;
+            margin-right: -15px;
             
             ul {
+                padding: 0;
+                margin: 0;
                 list-style: none;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                display:flex;
+                justify-content: space-around;
+                height: $navHeight;
+                
+                a {
+                    @include default-a();
+                    @include default-font();
+                
+                    li{
+                        @include default-box(); 
+                        height: $navHeight;
+                        line-height: 30px;
+                        padding: 0 15px;
+                    }
+                }
+
+                .signUpButton {
+                    @include default-box();
+                    padding: 0 15px;
+
+                    button {
+                        width: 100px;
+                        height: 36px;
+                        border-radius: 50px;
+                        background: linear-gradient(-45deg,#fdc830,#f37335);
+                        border: 0px;
+                        @include default-font(15px, 500);
+                        
+                    }
+                }
+                
             }
         }
     }
