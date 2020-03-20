@@ -1,16 +1,11 @@
 @import 'config';
 
 body {
-    margin: 0;
-    padding: 0;
-}
-
-
-nav {
-    height: $navHeight;
-    width: $navWidth;
-    background-color: $navColor;
-    display: flex;
+    margin:0;
+    padding:0;
+    // 상단 여백이 자꾸 생겼다 사라졌다 한다. 뭐지
+    // position: relative;
+    // top: -16px;
 }
 
 @mixin default-box {
@@ -22,10 +17,26 @@ nav {
     text-decoration: none;
 }
 
-@mixin default-font ($fontSize:18px, $fontWeight:400) {
+@mixin default-font ($fontSize:18px, $fontWeight:400, $color:white) {
     font-size: $fontSize;
     font-weight: $fontWeight;
-    color:white;
+    color:$color;
+}
+
+@mixin default-button ($colorFrom, $colorTo, $width:100px, $height:36px) {
+    width: $width;
+    height: $height;
+    border-radius: 50px;
+    background: linear-gradient(-45deg,$colorFrom,$colorTo);
+    border: 0px;
+}
+
+nav {
+    height: $navHeight;
+    width: $navWidth;
+    background-color: transparent;
+    display: flex;
+    position: fixed;
 }
 
 .container {
@@ -97,11 +108,7 @@ nav {
                     padding: 0 15px;
 
                     button {
-                        width: 100px;
-                        height: 36px;
-                        border-radius: 50px;
-                        background: linear-gradient(-45deg,#fdc830,#f37335);
-                        border: 0px;
+                        @include default-button(#fdc830,#f37335);
                         @include default-font(15px, 500);
                         
                     }
@@ -114,5 +121,49 @@ nav {
 
 
 main {
-    padding-top: $navHeight * 5;
+    .pageTemplate {
+        height: $pageTemplateHeight;
+        background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(https://nomad-coders-assets.s3.ap-northeast-2.amazonaws.com/static/img/bgs/homeBG.jpg);
+        background-size: 100%;
+        
+        /*
+        원래 여기에 margin-top:$navHeight 넣어줘야되는데
+        지금은 nav가 postion fixed라서 겹쳐지므로 따로 안넣어줬다.
+        (javascript로 구현할때는 div끼리 block이라 안겹치기 때문에 겹치게 하려고 일부러 margin:-60px준듯.)
+        */
+
+        .pageTitle {
+            padding: 170px 30px 0px 30px;
+            width: 100%;
+            height: 530px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .header {
+                @include default-font(3rem);
+            }
+            button {
+                @include default-button(#8e2de2,#4a00e0,290px,61px);
+                @include default-font();
+            }
+        }
+
+        .customWave{
+            // 배경 물결무늬로 잘라야하는데 어떻게하는지 모르겠어서 fail..
+        }
+    }
+    
+    .container {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .smallHeader {
+            @include default-font(2.5rem,400,#333);
+        }
+    }
+
+
 }
