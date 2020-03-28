@@ -83,7 +83,6 @@ function loadToDos(){
         // object화 된 각각의 ToDo들에 대해 paintToDo함수를 실행하기 위해서 새로운 함수를 사용한다.
         // 새로운 함수의 argument로 toDo라는, parsedToDos내의 각각의 객체를 전달한다.
         parsedToDos.forEach(function(toDo){
-            console.log(toDo);
             paintTodo(toDo.text);
         });
     }
