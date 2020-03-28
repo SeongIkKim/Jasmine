@@ -8,7 +8,7 @@ body {
 
 h1 {
     color: #34495e;
-    transition: color .5s; 
+    font-size: 48px;
 }
 
 .clicked {
