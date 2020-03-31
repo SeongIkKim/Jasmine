@@ -4,7 +4,7 @@ fetch("https://api.hnpwa.com/v0/news/1.json") // 이 fetch는 URL주소에 요�
     console.log(response.json());
     return response.json();
   })
-  .then(response => {
+  .then(response => { // response.json()에서 fulfilled 또는 rejected된 응답(Promise가 아님)을 받아왔다. 이것이 우리가 원하던 'URL에서 응답받은 데이터'이다.
     console.log("fetch API call");
     console.log(response);
     console.log("fetch End");
@@ -12,4 +12,4 @@ fetch("https://api.hnpwa.com/v0/news/1.json") // 이 fetch는 URL주소에 요�
   .catch(error => {
     console.log(error);
   });
-console.log("프로그램 종료");
+console.log("프로그램 종료"); // 이 log가 위의 fetch log보다 먼저 실행된다.(then이하의 블록들은 주소에서 응답을 받아오고있기때문에-async- 아래의 코드를 먼저 실행한다)
