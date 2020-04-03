@@ -59,9 +59,10 @@ const mainInit = async () => {
             const movieDetail = response.data.data.movie;
             // 최초의 movie로 만든 moviecard app에 추가
             const movieCard = makeMovieCard(movieDetail);
+            // movieCard 클릭시 detail 페이지로 이동하는 이벤트 달아줌
+            movieCard.onclick = function() {location.href = `./detail.html?id=${movieDetail.id}`;};
             app.appendChild(movieCard);
         }
-
 
 
 
