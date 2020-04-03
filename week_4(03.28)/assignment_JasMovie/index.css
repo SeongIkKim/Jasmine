@@ -1,3 +1,8 @@
+body{
+    margin:0;
+    padding:0;
+}
+
 #app{
     padding: 50px;
     display: flex;
@@ -36,10 +41,6 @@
     font-weight: 600;
 }
 
-.card-body > div{
-    margin-bottom: 20px;
-}
-
 .card-body p {
     color: rgb(180, 181, 189);
     overflow: hidden;
@@ -47,3 +48,17 @@
     white-space: nowrap;
     margin: 0px;
 }
+
+.card-body > div{
+    margin-bottom: 20px;
+}
+
+.card-body > div > p {
+    display: inline-block;
+    color: rgb(180, 181, 189);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+
+
