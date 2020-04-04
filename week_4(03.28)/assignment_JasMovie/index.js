@@ -53,7 +53,7 @@ const mainInit = async () => {
         
         // 각 movie별로 card 만들고 정보 채워넣어 띄우기
         for(var i=0; i<movieList.length; i++){
-            response = await axios.get(
+            response = axios.get(
                 `https://yts.mx/api/v2/movie_details.json?movie_id=${movieList[i].id}&with_images=true`
             );
             const movieDetail = response.data.data.movie;
@@ -65,15 +65,6 @@ const mainInit = async () => {
         }
 
 
-
-        // 첫번째 movie의 추천영화
-        // 추후 for문으로 대체
-        // response = await axios.get(
-        //     `https://yts.mx/api/v2/movie_suggestions.json?movie_id=${movieList[0].id}`
-        // )
-        // const movieSuggestion = response.data.data.movies;
-        // console.log("moive suggestion은");
-        // console.log(movieSuggestion);
         
     } catch (error) {
         console.log(error);

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Practice</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+      .strong {
+        color: hotpink;
+      }
+      .clicked {
+        background-color: aqua;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- v-bind(변수),if,for 등을 directive라고 부른다. -->
+      <!-- v-bind는 축약하여 그냥 :로 써도된다. -->
+
+      <div v-on:click="alertMessage()">{{ message }}</div>
+      <!-- input,textarea에 사용되는 v-model은 vue객체를 바로 변경시킬 수 있어서, binding된 다른 객체들도 같이 바뀐다. -->
+      <input v-model="message" type="text">
+      <textarea v-model="message"></textarea>
+      
+      <div>{{ reversedMessage }}</div>
+
+      <div :class="className">Hi!!!</div>
+      <div v-if="isShow" :class="className">
+        까꿍
+      </div>
+      <hr>
+      <!-- 화면상에 표시는 안되지만, key를 지정해주는것이 각각의 item 분리에 좋다. -->
+      <div v-for="item in list" :key="item">
+        {{item}}
+      </div>
+      <hr>
+      
+      <!-- isClicked가 true일 때만 class명으로 clicked를 줘라! -->
+      <button :class="{ clicked: isClicked }" v-on:click="clickBtn()">버튼</button>
+    </div>
+
+    <!-- <script src="src/js/main.js"></script> -->
+    <script src="src/js/vuePractice.js"></script> -->
+  </body>
+</html>
+
