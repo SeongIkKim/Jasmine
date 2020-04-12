@@ -56,6 +56,7 @@ const mainInit = async () => {
             response = axios.get(
                 `https://yts.mx/api/v2/movie_details.json?movie_id=${movieList[i].id}&with_images=true`
             );
+            console.log(response);
             const movieDetail = response.data.data.movie;
             // 최초의 movie로 만든 moviecard app에 추가
             const movieCard = makeMovieCard(movieDetail);
