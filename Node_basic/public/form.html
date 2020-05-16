@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email form</title>
+</head>
+<body>
+    <form action="/email_post" method="post">
+        email : <input type="text" name="email"><br>
+        submit : <input type="submit">
+    </form>
+
+    <button class="ajaxsend">ajaxsend</button>
+
+    <div class="result"></div>
+
+    <script>
+        document.querySelector('.ajaxsend').addEventListener("click",function(){
+            var inputdata = document.forms[0].elements[0].value;
+            sendAjax('http://127.0.0.1:3000/ajax_send_email', inputdata);
+        })
+
+        function sendAjax(url, data){
+            /* 1.데이터 형식 가공 */
+            var data = {'email' : data};
+            data = JSON.stringify(data); // json 데이터를 문자열 형태로 변환
+
+            /* 2.서버로 data를 보내기 */
+            var xhr = new XMLHttpRequest(); // XMLHttpRequest 객체 생성
+            xhr.open('POST',url); // response를 보낼 (즉, 호출할) 서버의 url를 지정. open(보내는 방식, URL, 비동기 여부)
+            xhr.setRequestHeader('Content-type',"application/json"); // server로 json 형태의 데이터를 보내겠다.
+            xhr.send(data); // data를 서버로 전송. 이때 데이터는 string 형식이어야 한다.
+            
+            /* 4. 반환받은 response값을 가공하여 html 태그 내에 집어넣기 */
+            xhr.addEventListener('load', function(){
+                var result = JSON.parse(xhr.responseText);
+                if (result.result != "ok") return;
+                document.querySelector(".result").innerHTML = result.email;
+            })
+        }
+    </script>
+</body>
+</html>
