@@ -35,8 +35,9 @@
             /* 4. 반환받은 response값을 가공하여 html 태그 내에 집어넣기 */
             xhr.addEventListener('load', function(){
                 var result = JSON.parse(xhr.responseText);
-                if (result.result != "ok") return;
-                document.querySelector(".result").innerHTML = result.email;
+                var resultDiv = document.querySelector(".result");
+                if (result.result != "ok") resultDiv.innerHTML = "your email is not found"; // 일치하는 email을 찾지 못했을경우
+                else resultDiv.innerHTML = result.name; // name값이 전달되었으므로 name값으로 바꾸어줌
             })
         }
     </script>
