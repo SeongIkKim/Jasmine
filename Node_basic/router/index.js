@@ -7,8 +7,8 @@ var join = require('./join/index');
 
 // url routing
 router.get('/', function(req,res){
-    console.log('index.js loaded');
-    res.sendFile(path.join(__dirname, '../public/main.html'));
+    console.log('get join url');
+    res.render('join.ejs');
 });
 
 // 라우팅 미들웨어를 기준으로 다시 라우팅하는 것이기 때문에, app.use가 아니라 router.use를 사용한다.
