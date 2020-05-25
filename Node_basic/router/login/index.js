@@ -21,7 +21,7 @@ router.get('/', function(req, res){
     var msg;
     var errMsg = req.flash('error') //에러 메시지는 flash로 넘어온다
     if(errMsg) msg = errMsg;
-	res.render('join.ejs', {'message': msg}); // ejs 템플릿에 message란 이름으로 msg 변수 내용을 전달한다
+	res.render('login.ejs', {'message': msg}); // ejs 템플릿에 message란 이름으로 msg 변수 내용을 전달한다
 })
 
 // passport.serialize
@@ -36,7 +36,7 @@ passport.deserializeUser(function(id,done){
 })
 
 /* passport strategy, callback 함수 작성 */
-passport.use('local-join', new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
     usernameField: 'email', // ejs의 form에서 전달받은 input name값을 입력해준다
     passwordField: 'password',
     passReqToCallback : true
@@ -58,7 +58,6 @@ passport.use('local-join', new LocalStrategy({
 }
 ));
 
-
 // pasport 라우팅 처리
 router.post('/',passport.authenticate('local-join', {
     //원래는 callback함수 자리지만, object literal로 표현해도 authenticated method가 콜백함수처럼 동작
@@ -67,21 +66,5 @@ router.post('/',passport.authenticate('local-join', {
     failureFlash: true 
 })
 )
-
-// router.post('/', function(req,res){
-//    var body = req.body;
-//    // form에서 input name인자로 받았던대로 접근할 수 있다
-//    var email = body.email;
-//    var name = body.name;
-//    var password = body.password;
-   
-//    var sql = {email:email, name:name, password:password};
-//    var query = connection.query('insert into user set ?', sql,
-//     function(err, rows) {
-//         if(err) throw err;
-//         // insert의 결과값이 rows로 출력된다
-//         else res.render('welcome.ejs', {'name' : name, 'id': rows.insertId})
-//     })
-// });
 
 module.exports = router;
