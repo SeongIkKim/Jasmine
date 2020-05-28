@@ -6,6 +6,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var flash = require('connect-flash');
+var cors = require('cors');
 
 
 app.listen(3000, function() {
@@ -18,6 +19,7 @@ app.use(express.static('public')); // public 폴더를 static 폴더로 설정�
 // 미들웨어 사용
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(cors());
 app.set('view engine','ejs');
 
 app.use(session({

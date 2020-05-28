@@ -27,7 +27,7 @@ router.get('/', function(req, res){
 // passport.serialize
 passport.serializeUser(function(user,done){
     console.log('passport session save : ',user.id)
-    done(null, user.id)
+    done(null, user.id);
 })
 
 passport.deserializeUser(function(id,done){
@@ -44,27 +44,29 @@ passport.use('local-login', new LocalStrategy({
     //인증 처리
     var query = connection.query('select * from user where email=?',[email],function(err,rows) {
         if(err) return done(err);   //error있으면 err있다고 보냄
-        if(rows.length){  //이미 email이 DB에 있으면 중복 방지
-            console.log('exsisted user')
-            return done(null, false, {message: 'your email is alread used'}) // false일때 flash를 이용해 message를 전달한다
-        }else{
-            var sql = {email:email, password:password};
-            var query = connection.query('insert into user set ?', sql, function(err, rows){
-                if(err) throw err
-                return done(null, {'email': email, 'password': password, 'id': rows.insertId})
-            })
+        
+        if(rows.length){  //이미 email이 DB에 있다면 login이 가능하므로 로그인 로직으로 새로 짜준다
+            return done(null, {'email':email,'id': rows[0].id}); // UID가 아니라 id
+        }else{ // 오류상황 - 해당 계정이 DB에 없을경우
+                return done(null,false, {'message' : 'your login info is not found ㅠㅠ'})
         }
     })
 }
 ));
 
-// pasport 라우팅 처리
-router.post('/',passport.authenticate('local-join', {
-    //원래는 callback함수 자리지만, object literal로 표현해도 authenticated method가 콜백함수처럼 동작
-    successRedirect: '/main',   //성공시 해당 위치로 라우팅
-    failureRedirect: '/join',   //사용자 이미 있을 시 해당 위치로 라우팅
-    failureFlash: true 
-})
-)
+// pasport 콜백함수 만들어주기
+router.post('/', function(req, res, next) {
+	passport.authenticate('local-login', function(err, user, info) {
+		if(err) res.status(500).json(err);
+		if (!user) return res.status(401).json(info.message);
 
-module.exports = router;
+		req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.json(user);
+    });
+
+	})(req, res, next);
+})
+
+
+module.exports = router; 
